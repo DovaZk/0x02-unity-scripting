@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     public Rigidbody rb;
     public float sidewaysForce = 500f;
     public float PlayerSpeed = 500f;
+    private int score = 0;
+    public int health = 5;
 
     // Start is called before the first frame update
     void Start()
@@ -40,9 +42,43 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+   // void Update()
+    //{
+//          if (this.health == 0)
+   //     {
+   //         Debug.Log("Game Over!");
+//            RestartGame();
+   //     }
+   // }
+
+    // function to restart the game
+   // public void RestartGame()
+    //{
+    //    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    //}
+
+
+    // Pick up a coin and destroy it when touch it
+    void OnTriggerEnter(Collider other)
     {
+        if (other.tag == "Pickup")
+        {
+            this.score += 1;
+            string log = "Score:" + " " + score;
+            Debug.Log(log);
+            Object.Destroy(other.gameObject, 0.5f);
+        }
 
+        if (other.tag == "Trap")
+        {
+            this.health -= 1;
+            string log = "Health:" + " " + health;
+            Debug.Log(log);
+        }
+
+        if (other.tag == "Goal")
+        {
+            Debug.Log("You Win!");
+        }
     }
-
 }
