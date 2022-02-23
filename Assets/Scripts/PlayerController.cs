@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -42,20 +43,20 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
-   // void Update()
-    //{
-//          if (this.health == 0)
-   //     {
-   //         Debug.Log("Game Over!");
-//            RestartGame();
-   //     }
-   // }
+    void Update()
+    {
+          if (this.health == 0)
+        {
+            Debug.Log("Game Over!");
+            RestartGame();
+        }
+    }
 
     // function to restart the game
-   // public void RestartGame()
-    //{
-    //    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    //}
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 
 
     // Pick up a coin and destroy it when touch it
@@ -66,7 +67,7 @@ public class PlayerController : MonoBehaviour
             this.score += 1;
             string log = "Score:" + " " + score;
             Debug.Log(log);
-            Object.Destroy(other.gameObject, 0.5f);
+            Object.Destroy(other.gameObject, 1.0f);
         }
 
         if (other.tag == "Trap")
